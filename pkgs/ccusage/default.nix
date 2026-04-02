@@ -1,4 +1,4 @@
-{ stdenv, fetchzip, nodejs_22, makeWrapper }:
+{ lib, stdenv, fetchzip, nodejs_22, makeWrapper }:
 
 let
   nodejs = nodejs_22;
@@ -28,6 +28,7 @@ stdenv.mkDerivation {
   meta = {
     description = "Claude Code usage analytics CLI tool";
     homepage = "https://github.com/ryoppippi/ccusage";
+    license = lib.licenses.mit;
     mainProgram = "ccusage";
   };
 }

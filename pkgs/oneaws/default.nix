@@ -1,4 +1,4 @@
-{ bundlerApp }:
+{ lib, bundlerApp }:
 
 bundlerApp {
   pname = "oneaws";
@@ -10,7 +10,8 @@ bundlerApp {
 
   meta = {
     description = "CLI tool for AWS authentication via OneLogin";
-    homepage = "https://github.com/AnyBridge/oneaws";
+    homepage = "https://github.com/pepabo/oneaws";
+    license = lib.licenses.unfree;
     mainProgram = "oneaws";
   };
 }

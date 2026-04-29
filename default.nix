@@ -24,4 +24,5 @@
   gogcli = pkgs.callPackage ./pkgs/gogcli { };
   kagiana = pkgs.callPackage ./pkgs/kagiana { };
   ccpocket-bridge = pkgs.callPackage ./pkgs/ccpocket-bridge { };
+  roots = pkgs.callPackage ./pkgs/roots { };
 }

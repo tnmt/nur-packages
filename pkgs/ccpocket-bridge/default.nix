@@ -10,13 +10,13 @@
 
 buildNpmPackage (finalAttrs: {
   pname = "ccpocket-bridge";
-  version = "1.53.1";
+  version = "1.54.0";
 
   src = fetchFromGitHub {
     owner = "K9i-0";
     repo = "ccpocket";
     rev = "bridge/v${finalAttrs.version}";
-    hash = "sha256-Z+WKl0zmXa9O8WhKRgXC+PAF6NtiURT50wXNvNT0ydY=";
+    hash = "sha256-ZNyp3IRxC7BoTFM79pgv6PRm1VTNtAGrKn4uAyqoJhw=";
   };
 
   patches = [ ./sdk-process-claude-path.patch ];

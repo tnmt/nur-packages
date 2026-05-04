@@ -7,6 +7,8 @@
   jq,
   nodejs,
   pnpm_10,
+  pnpmConfigHook,
+  fetchPnpmDeps,
   nix-update-script,
 }:
 
@@ -32,11 +34,13 @@ let
     nativeBuildInputs = [
       jq
       nodejs
-      pnpm_10.configHook
+      pnpmConfigHook
+      pnpm_10
     ];
 
-    pnpmDeps = pnpm_10.fetchDeps {
+    pnpmDeps = fetchPnpmDeps {
       inherit (finalAttrs) pname version src;
+      pnpm = pnpm_10;
       fetcherVersion = 2;
       sourceRoot = "${src.name}/internal/frontend";
       hash = "sha256-bjVW04Tm7sy+N690b9JjI4HlVJ9tjla+V16MIpr8nAA=";

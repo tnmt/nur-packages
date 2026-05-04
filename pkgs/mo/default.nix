@@ -3,6 +3,7 @@
   stdenv,
   buildGoModule,
   fetchFromGitHub,
+  go_1_26,
   jq,
   nodejs,
   pnpm_10,
@@ -66,7 +67,7 @@ let
     '';
   });
 in
-buildGoModule {
+(buildGoModule.override { go = go_1_26; }) {
   pname = "mo";
   inherit version src;
 

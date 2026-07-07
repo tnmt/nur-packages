@@ -24,9 +24,6 @@ jobs:
           - herdr
           - mo
           - symbol-desktop-wallet
-        include:
-          - package: herdr
-            systems: "x86_64-linux aarch64-linux x86_64-darwin aarch64-darwin"
     steps:
     - name: Checkout repository
       uses: actions/checkout@v7
@@ -48,17 +45,14 @@ jobs:
       env:
         NIXPKGS_ALLOW_UNFREE: "1"
       run: |
-        SYSTEMS="${{ matrix.systems }}"
-        SYSTEMS="${SYSTEMS:-x86_64-linux}"
-        for sys in $SYSTEMS; do
-          if [ "$sys" = "x86_64-linux" ]; then
-            nix shell nixpkgs#nix-update -c \
-              nix-update --system "$sys" --build -f ./default.nix ${{ matrix.package }}
-          else
-            nix shell nixpkgs#nix-update -c \
-              nix-update --system "$sys" -f ./default.nix ${{ matrix.package }}
-          fi
-        done
+        nix shell nixpkgs#nix-update -c \
+          nix-update --system x86_64-linux --build -f ./default.nix ${{ matrix.package }}
+
+    # nix-update はホスト (x86_64-linux) 以外の hash を更新できないため、
+    # 各プラットフォームのアセットを prefetch して sources の hash を揃える
+    - name: Update multi-platform hashes
+      if: matrix.package == 'herdr'
+      run: ./pkgs/herdr/update.sh
 
     - name: Detect changes
       id: after

@@ -21,7 +21,6 @@ jobs:
           - roots
           - git-wt
           - givy
-          - herdr
           - mo
           - symbol-desktop-wallet
     steps:
@@ -47,12 +46,6 @@ jobs:
       run: |
         nix shell nixpkgs#nix-update -c \
           nix-update --system x86_64-linux --build -f ./default.nix ${{ matrix.package }}
-
-    # nix-update はホスト (x86_64-linux) 以外の hash を更新できないため、
-    # 各プラットフォームのアセットを prefetch して sources の hash を揃える
-    - name: Update multi-platform hashes
-      if: matrix.package == 'herdr'
-      run: ./pkgs/herdr/update.sh
 
     - name: Detect changes
       id: after

@@ -237,6 +237,7 @@ jobs:
       if: steps.after.outputs.changed == 'true'
       uses: peter-evans/create-pull-request@v8
       with:
+        token: ${{ secrets.NUR_UPDATE_PAT }}
         branch: update/chatgpt-${{ steps.fetch.outputs.version }}
         commit-message: "chatgpt: ${{ steps.before.outputs.version }} -> ${{ steps.fetch.outputs.version }}"
         title: "chatgpt: ${{ steps.before.outputs.version }} -> ${{ steps.fetch.outputs.version }}"

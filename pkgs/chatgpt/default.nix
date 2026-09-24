@@ -4,6 +4,7 @@
   fetchurl,
   dpkg,
   autoPatchelfHook,
+  makeWrapper,
   alsa-lib,
   at-spi2-atk,
   at-spi2-core,
@@ -111,6 +112,7 @@ stdenv.mkDerivation {
   nativeBuildInputs = [
     dpkg
     autoPatchelfHook
+    makeWrapper
   ];
 
   buildInputs = runtimeDeps;
@@ -146,7 +148,8 @@ stdenv.mkDerivation {
     mkdir -p $out/lib $out/bin $out/share/applications $out/share/pixmaps
     cp -r usr/lib/chatgpt $out/lib/
 
-    ln -s $out/lib/chatgpt/ChatGPT $out/bin/chatgpt
+    makeWrapper $out/lib/chatgpt/ChatGPT $out/bin/chatgpt \
+      --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations --enable-wayland-ime=true}}"
 
     install -Dm644 usr/share/pixmaps/chatgpt.png $out/share/pixmaps/chatgpt.png
     install -Dm644 usr/share/applications/chatgpt.desktop $out/share/applications/chatgpt.desktop

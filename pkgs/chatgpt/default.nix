@@ -117,6 +117,9 @@ stdenv.mkDerivation {
 
   buildInputs = runtimeDeps;
 
+  # ANGLE loads libEGL.so.1 via dlopen, so autoPatchelf can't infer it from DT_NEEDED.
+  runtimeDependencies = [ libGL ];
+
   unpackPhase = ''
     runHook preUnpack
     dpkg-deb -x $src .

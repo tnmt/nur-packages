@@ -1,4 +1,4 @@
-{ lib, buildGoModule, fetchFromGitHub, nix-update-script }:
+{ lib, buildGoModule, fetchFromGitHub, go, nix-update-script }:
 
 buildGoModule rec {
   pname = "roots";
@@ -28,5 +28,7 @@ buildGoModule rec {
     homepage = "https://github.com/k1LoW/roots";
     license = lib.licenses.mit;
     mainProgram = "roots";
+    # go.mod requires go >= 1.26.8, which stable channels (e.g. nixos-25.11) don't ship yet.
+    broken = lib.versionOlder go.version "1.26.8";
   };
 }

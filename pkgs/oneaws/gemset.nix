@@ -149,10 +149,10 @@
     platforms = [];
     source = {
       remotes = ["https://rubygems.org"];
-      sha256 = "1d9safb4dly6qmc2g06444l0zifby52yy6j1a5fa1g4j3ihm3jah";
+      sha256 = "1f4jz6yhzj7i8gl2zif4pld2plxalkf6pcbp4y3qzcacql3lbsdb";
       type = "gem";
     };
-    version = "1.19.4";
+    version = "1.19.7";
   };
   oneaws = {
     dependencies = ["aws-sdk-core" "base64" "inifile" "logger" "onelogin" "openssl" "thor"];
